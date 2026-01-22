@@ -93,8 +93,8 @@ shift = shift % numStr.length;
 
 let result = numStr.slice(shift) + numStr.slice(0, shift);
 alert("Результат: " + result);
+
 8. Дни недели (DO WHILE)
-javascript
 let days = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
 let index = 0;
 let showNext;
@@ -105,6 +105,7 @@ do
     index = (index + 1) % 7;
     showNext = confirm("Хотите увидеть следующий день?");
 } while (showNext);
+
 9. Таблица умножения (FOR)
 let table = "";
 
