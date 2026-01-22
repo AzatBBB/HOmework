@@ -1,0 +1,66 @@
+1. Приветствие пользователя
+let name = prompt("Введите ваше имя:");
+alert("Привет, " + name + "!");
+
+2. Расчет возраста
+const currentYear = 2026;
+let birthYear = prompt("Введите год вашего рождения:");
+let age = currentYear - parseInt(birthYear);
+alert("Вам " + age + " лет");
+
+​3. Периметр квадрата
+javascript
+let side = prompt("Введите длину стороны квадрата:");
+let perimeter = parseFloat(side) * 4;
+alert("Периметр квадрата: " + perimeter);
+
+4. Площадь окружности
+let radius = prompt("Введите радиус окружности:");
+let area = Math.PI * Math.pow(parseFloat(radius), 2);
+alert("Площадь окружности: " + area);
+
+5. Расчет скорости
+let distance = prompt("Введите расстояние между городами (км):");
+let time = prompt("За сколько часов хотите добраться:");
+let speed = parseFloat(distance) / parseFloat(time);
+alert("Необходимая скорость: " + speed + " км/ч");
+
+6. Конвертор валют
+const exchangeRate = 0.92; // курс доллара к евро
+let dollars = prompt("Введите сумму в долларах:");
+let euros = parseFloat(dollars) * exchangeRate;
+alert(dollars + " долларов = " + euros + " евро");
+
+7. Количество файлов на флешке
+let flashSizeGb = prompt("Введите объем флешки в Гб:");
+let flashSizeMb = parseFloat(flashSizeGb) * 1024;
+let fileSize = 820;
+let filesCount = Math.floor(flashSizeMb / fileSize);
+alert("На флешку поместится " + filesCount + " файлов по 820 Мб");
+
+8. Покупка шоколадок
+javascript
+let wallet = prompt("Введите сумму денег в кошельке:");
+let chocolatePrice = prompt("Введите цену одной шоколадки:");
+let moneyAmount = parseFloat(wallet);
+let price = parseFloat(chocolatePrice);
+let chocolatesCount = Math.floor(moneyAmount / price);
+let change = moneyAmount % price;
+alert("Вы можете купить " + chocolatesCount + " шоколадок. Сдача: " + change.toFixed(2));
+
+9. Переворот трехзначного числa
+let number = prompt("Введите трехзначное число:");
+let num = parseInt(number);
+let digit1 = num % 10;
+let digit2 = Math.floor(num / 10) % 10;
+let digit3 = Math.floor(num / 100);
+let reversedNumber = digit1 * 100 + digit2 * 10 + digit3;
+alert("Число задом наперед: " + reversedNumber);
+Здесь оператор % извлекает последнюю цифру, а деление с Math.floor() убирает разряды.
+
+10. Проверка четности без if
+let number = prompt("Введите целое число:");
+let num = parseInt(number);
+let isEven = (num % 2 === 0);
+let result = isEven && "Число четное" || "Число нечетное";
+alert(result);
