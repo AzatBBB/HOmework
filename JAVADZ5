@@ -1,0 +1,68 @@
+1 Задание
+class Circle {
+    
+    constructor(radius) {
+        this._radius = radius; // Используем _radius как "скрытое" поле
+    }
+
+    get radius() {
+        return this._radius;
+    }
+
+    set radius(value) {
+        if (value <= 0) {
+            console.log("Ошибка: Радиус должен быть положительным числом.");
+            return;
+        }
+        this._radius = value;
+    }
+
+    get diameter() {
+        return this._radius * 2;
+    }
+
+    area() {
+        return Math.PI * Math.pow(this._radius, 2);
+    }
+
+    circumference() {
+        return 2 * Math.PI * this._radius;
+    }
+}
+
+3 Задание
+class CssClass {
+    constructor(className) {
+        this.className = className;
+        this.styles = []; // Массив для хранения стилей в формате { property: "...", value: "..." }
+    }
+
+   
+    setStyle(property, value) {
+        
+        const existingStyleIndex = this.styles.findIndex(s => s.property === property);
+
+        if (existingStyleIndex !== -1) {
+            
+            this.styles[existingStyleIndex].value = value;
+        } else {
+            
+            this.styles.push({ property, value });
+        }
+    }
+
+    
+    removeStyle(property) {
+        this.styles = this.styles.filter(s => s.property !== property);
+    }
+
+    
+    getCss() {
+        
+        let stylesString = this.styles
+            .map(s => `  ${s.property}: ${s.value};`) // Добавляем отступы для красоты
+            .join("\n");
+
+        return `.${this.className} {\n${stylesString}\n}`;
+    }
+}
