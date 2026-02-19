@@ -1,0 +1,114 @@
+class Marker {
+  constructor(color, inkPercent = 100) {
+    this.color = color;
+    this.inkPercent = Math.max(0, Math.min(100, inkPercent));
+  }
+
+  print(text) {
+    const costPerChar = 0.5;
+    let out = "";
+    let spent = 0;
+
+    for (const ch of text) {
+      if (ch.trim() === "") {
+        out += ch;
+        continue;
+      }
+      if (this.inkPercent - spent < costPerChar) break;
+      out += ch;
+      spent += costPerChar;
+    }
+
+    this.inkPercent = Math.max(0, +(this.inkPercent - spent).toFixed(1));
+    console.log(`%c${out}`, `color: ${this.color}; font-weight: 600;`);
+    return out;
+  }
+}
+
+class RefillableMarker extends Marker {
+  refill(amountPercent) {
+    if (amountPercent <= 0) return this.inkPercent;
+    this.inkPercent = Math.min(100, +(this.inkPercent + amountPercent).toFixed(1));
+    return this.inkPercent;
+  }
+}
+
+const m1 = new Marker("blue", 3);
+m1.print("Привет, мир!");
+console.log("Остаток:", m1.inkPercent + "%");
+
+const m2 = new RefillableMarker("green", 2);
+m2.print("JS + jQuery");
+
+console.log("Остаток:", m2.inkPercent + "%");
+
+m2.refill(50);
+console.log("После заправки:", m2.inkPercent + "%");
+m2.print("JS + jQuery");
+
+
+
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>EmpTable</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    class Employee {
+      constructor(firstName, lastName, position, salary) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.position = position;
+        this.salary = salary;
+      }
+    }
+
+    class EmpTable {
+      constructor(employees) {
+        this.employees = employees;
+      }
+
+      getHtml() {
+        return `
+          <table border="1" cellpadding="6" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Должность</th>
+                <th>Зарплата</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${this.employees.map(e => `
+                <tr>
+                  <td>${e.firstName}</td>
+                  <td>${e.lastName}</td>
+                  <td>${e.position}</td>
+                  <td>${e.salary}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+      }
+    }
+
+    const bankEmployees = [
+      new Employee("Иван", "Петров", "Кассир", 55000),
+      new Employee("Анна", "Смирнова", "Менеджер", 80000),
+      new Employee("Дмитрий", "Кузнецов", "Кредитный специалист", 75000),
+      new Employee("Ольга", "Иванова", "Оператор", 60000)
+    ];
+
+    const table = new EmpTable(bankEmployees);
+    document.getElementById("app").innerHTML = table.getHtml();
+  </script>
+</body>
+</html>
